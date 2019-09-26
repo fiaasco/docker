@@ -4,17 +4,17 @@
   set_fact:
     docker_arch: '{% if ansible_architecture == "aarch64" %}arm64{% else %}amd64{% endif %}'
 
-- name: remove non docker-ce packages from the system
-  apt:
-    name: "{{ item }}"
-    state: absent
-  loop: "{{ docker_legacy_packages }}"
-
 - name: install package requirements
   apt:
     name: "{{ item }}"
     state: present
   loop: "{{ docker_required_packages }}"
+
+- name: remove non docker-ce packages from the system
+  apt:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ docker_legacy_packages }}"
 
 - name: add docker-ce gpg key for repository access
   apt_key:
