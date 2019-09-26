@@ -1,0 +1,43 @@
+---
+
+- name: remove non docker-ce packages from the system
+  yum:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ docker_legacy_packages }}"
+
+- name: install package requirements
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ docker_required_packages }}"
+
+- name: add docker-ce gpg key for repository access
+  yum_repository:
+    name: docker-ce
+    description: docker-ce-stable
+    baseurl: "https://download.docker.com/linux/centos/7/$basearch/stable"
+    gpgcheck: true
+    gpgkey: https://download.docker.com/linux/centos/gpg
+    enabled: true
+    state: present
+
+- name: install docker packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ docker_packages }}"
+
+- name: make sure python docker-compose is installed
+  pip:
+    name: docker-compose
+    executable: pip3
+    state: present
+    version: "{{ docker_compose_version }}"
+
+- name: add users to the docker group
+  user:
+    name: "{{ item.name }}"
+    groups: docker
+    append: yes
+  loop: "{{ users }}"

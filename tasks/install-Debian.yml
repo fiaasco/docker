@@ -1,0 +1,53 @@
+---
+
+- name: set the correct architecture
+  set_fact:
+    docker_arch: '{% if ansible_architecture == "aarch64" %}arm64{% else %}amd64{% endif %}'
+
+- name: remove non docker-ce packages from the system
+  apt:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ docker_legacy_packages }}"
+
+- name: install package requirements
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ docker_required_packages }}"
+
+- name: add docker-ce gpg key for repository access
+  apt_key:
+    url: "https://download.docker.com/linux/{{ ansible_distribution|lower }}/gpg"
+    state: present
+
+- name: add apt repository for docker-ce
+  apt_repository:
+    repo: "deb [arch={{ docker_arch }}] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable"
+    state: present
+    update_cache: yes
+
+- name: install docker packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ docker_packages }}"
+
+- name: make sure python docker-compose is installed
+  pip:
+    name: docker-compose
+    state: present
+    version: "{{ docker_compose_version }}"
+
+- name: ensure docker-compose has correct permissions
+  file:
+    dest: /usr/local/bin/docker-compose
+    owner: root
+    group: docker
+
+- name: add users to the docker group
+  user:
+    name: "{{ item.name }}"
+    groups: docker
+    append: yes
+  loop: "{{ users }}"

@@ -1,0 +1,31 @@
+---
+
+# description: legacy docker packages to be removed
+# type: list
+docker_legacy_packages:
+  - docker
+  - docker-engine
+  - docker.io
+  - containerd
+  - runc
+
+# description: packages required prior to installing repos
+# type: list
+docker_required_packages:
+  - apt-transport-https
+  - aptitude
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - python3-apt
+  - python-docker
+  - python-pip
+  - python3-pip
+  - software-properties-common
+
+# description: docker-ce packages
+# type: list
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io

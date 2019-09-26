@@ -1,0 +1,30 @@
+---
+
+# description: legacy docker packages to be removed
+# type: list
+docker_legacy_packages:
+  - docker
+  - docker-client
+  - docker-client-latest
+  - docker-common
+  - docker-latest
+  - docker-latest-logrotate
+  - docker-logrotate
+  - docker-engine
+
+# description: packages required prior to installing repos
+# type: list
+docker_required_packages:
+  - device-mapper-persistent-data
+  - lvm2
+  - python-docker
+  - python-setuptools
+  - python3-pip
+  - python3-setuptools
+  - yum-utils
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - python-docker
