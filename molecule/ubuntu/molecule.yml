@@ -12,10 +12,6 @@ platforms:
     image: ubuntu:bionic
     command: /lib/systemd/systemd
     privileged: true
-  - name: docker-ubuntu-xenial
-    image: ubuntu:xenial
-    command: /lib/systemd/systemd
-    privileged: true
 provisioner:
   name: ansible
   config_options:
