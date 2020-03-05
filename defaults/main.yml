@@ -6,4 +6,4 @@ docker_compose_version: 1.24.1
 
 # description: default users to add to the docker group
 # type: list
-users: []
+docker_users: []
