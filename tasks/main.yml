@@ -18,6 +18,7 @@
 - name: get docker info
   command: docker info
   register: dockerinfo
+  changed_when: false
 
 - name: show it
   debug:
