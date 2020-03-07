@@ -31,3 +31,12 @@
 
 - name: Set storage driver when required
   include_tasks: config-driver.yml
+
+- name: show driver
+  debug:
+    var: dockerinfo.host_info.Driver
+
+- name: show driver
+  debug:
+    var: dockerinfo.host_info.DriverStatus
+  when: dockerinfo.host_info.DriverStatus is defined
