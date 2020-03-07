@@ -16,10 +16,9 @@
     enabled: true
 
 - name: get docker info
-  command: docker info
+  docker_host_info:
   register: dockerinfo
-  changed_when: false
 
 - name: show it
   debug:
-    msg: "{{ dockerinfo }}"
+    var: dockerinfo.host_info.Driver
