@@ -21,4 +21,4 @@
 
 - name: show it
   debug:
-    var: "{{ dockerinfo }}"
+    msg: "{{ dockerinfo }}"
