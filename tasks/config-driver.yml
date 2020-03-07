@@ -3,6 +3,10 @@
 # https://stackoverflow.com/questions/50796341/add-a-new-key-value-to-a-json-file-using-ansible
 - when: docker_storage_driver|string
   block:
+    - name: create docker config directory
+      file:
+        dest: /etc/docker
+        state: directory
     - name: create daemon.json if not yet existing
       copy:
         content: "{}"
