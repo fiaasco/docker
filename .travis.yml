@@ -8,6 +8,12 @@ services:
 
 before_install:
   - sudo apt-get -qq update
+  - >
+    mkdir /tmp/docker; echo '{
+    "experimental": true,
+    "storage-driver": "overlay2"
+    }' | sudo tee /etc/docker/daemon.json;  sudo service docker restart
+  - docker info
 
 install:
   - pip install -r requirements.txt

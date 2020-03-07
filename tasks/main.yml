@@ -6,6 +6,9 @@
 - name: Install Docker CE
   include_tasks: "install-{{ ansible_os_family }}.yml"
 
+- name: Set storage driver when required
+  include_tasks: config-driver.yml
+
 - name: Start docker
   service:
     name: docker

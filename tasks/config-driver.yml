@@ -1,0 +1,21 @@
+---
+
+# https://stackoverflow.com/questions/50796341/add-a-new-key-value-to-a-json-file-using-ansible
+- when: docker_storage_driver|string
+  block:
+    - name: create daemon.json if not yet existing
+      copy:
+        content: "{}"
+        dest: /etc/docker/daemon.json
+        force: false
+    - name: fetch current configuration
+      slurp:
+        src: /etc/docker/daemon.json
+      register: current_docker_config
+    - name: append the driver we want to set
+      set_fact:
+        docker_config: "{{ current_docker_config.content|b64decode|from_json|default([])|combine({ 'storage-driver': 'overlay2' }) }}"
+    - name: configure daemon.json
+      copy:
+        content: "{{ docker_config|to_nice_json }}"
+        dest: /etc/docker/daemon.json

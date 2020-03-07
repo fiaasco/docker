@@ -24,6 +24,10 @@ provisioner:
       pipelining: true
   lint:
     name: ansible-lint
+  inventory:
+    group_vars:
+      all:
+        docker_storage_driver: overlay2
 verifier:
   name: testinfra
   lint:

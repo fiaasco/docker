@@ -25,8 +25,9 @@ def test_docker_compose_exec(host):
     assert "docker-py" in command.stdout
 
 
+@pytest.mark.parametrize('container', ['docker-ce', 'containerd.io', 'docker-ce-cli', 'python-docker'])
 def test_docker_hello_world(host):
-    command = host.run("docker run hello-world")
+    command = host.run("docker ps")
     assert "This message shows that your installation appears to be working correctly." in command.stdout
 
 
