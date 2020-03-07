@@ -31,7 +31,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        docker_storage_driver: overlayfs
+        docker_storage_driver: overlay
 verifier:
   name: testinfra
   lint:
