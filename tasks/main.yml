@@ -6,9 +6,6 @@
 - name: Install Docker CE
   include_tasks: "install-{{ ansible_os_family }}.yml"
 
-- name: Set storage driver when required
-  include_tasks: config-driver.yml
-
 - name: Start docker
   service:
     name: docker
@@ -26,3 +23,11 @@
 - name: show driver
   debug:
     var: dockerinfo.host_info.Driver
+
+- name: show driver
+  debug:
+    var: dockerinfo.host_info.DriverStatus.'Backing Filesystem'
+  when: dockerinfo.host_info.DriverStatus is defined and dockerinfo.host_info.DriverStatus.'Backing Filesystem' is defined
+
+- name: Set storage driver when required
+  include_tasks: config-driver.yml
