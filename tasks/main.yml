@@ -19,6 +19,10 @@
   docker_host_info:
   register: dockerinfo
 
-- name: show it
+- name: show all
+  debug:
+    var: dockerinfo.host_info
+
+- name: show driver
   debug:
     var: dockerinfo.host_info.Driver
