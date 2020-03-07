@@ -14,3 +14,11 @@
     name: docker
     state: started
     enabled: true
+
+- name: get docker info
+  command: docker info
+  register: dockerinfo
+
+- name: show it
+  debug:
+    var: "{{ dockerinfo }}"
