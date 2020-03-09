@@ -13,7 +13,7 @@ platforms:
     command: /sbin/init
     privileged: true
     volumes:
-      - /tmp/docker:/var/lib/docker
+      - /tmp/docker-centos-7:/var/lib/docker
 provisioner:
   name: ansible
   config_options:

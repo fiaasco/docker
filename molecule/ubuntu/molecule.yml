@@ -13,7 +13,7 @@ platforms:
     command: /lib/systemd/systemd
     privileged: true
     volumes:
-      - /tmp/docker:/var/lib/docker
+      - /tmp/docker-ubuntu-bionic:/var/lib/docker
 provisioner:
   name: ansible
   config_options:

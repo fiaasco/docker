@@ -13,13 +13,13 @@ platforms:
     command: /lib/systemd/systemd
     privileged: true
     volumes:
-      - /tmp/docker:/var/lib/docker
+      - /tmp/docker-debian-10:/var/lib/docker
   - name: docker-debian-9
     image: debian:9
     command: /lib/systemd/systemd
     privileged: true
     volumes:
-      - /tmp/docker:/var/lib/docker
+      - /tmp/docker-debian-9:/var/lib/docker
 provisioner:
   name: ansible
   config_options:
