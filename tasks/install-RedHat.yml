@@ -40,4 +40,4 @@
     name: "{{ item.name }}"
     groups: docker
     append: yes
-  loop: "{{ users }}"
+  loop: "{{ docker_users }}"
