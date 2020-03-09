@@ -14,6 +14,12 @@ platforms:
     privileged: true
     volumes:
       - /tmp/docker-ubuntu-bionic:/var/lib/docker
+  - name: docker-ubuntu-xenial
+    image: ubuntu:xenial
+    command: /lib/systemd/systemd
+    privileged: true
+    volumes:
+      - /tmp/docker-ubuntu-xenial:/var/lib/docker
 provisioner:
   name: ansible
   config_options:
