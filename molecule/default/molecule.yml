@@ -12,10 +12,14 @@ platforms:
     image: debian:10
     command: /lib/systemd/systemd
     privileged: true
+    volumes:
+      - /tmp/docker:/var/lib/docker
   - name: docker-debian-9
     image: debian:9
     command: /lib/systemd/systemd
     privileged: true
+    volumes:
+      - /tmp/docker:/var/lib/docker
 provisioner:
   name: ansible
   config_options:
@@ -28,10 +32,10 @@ provisioner:
       pipelining: true
   lint:
     name: ansible-lint
-  inventory:
-    group_vars:
-      all:
-        docker_storage_driver: overlay
+#  inventory:
+#    group_vars:
+#      all:
+#        docker_storage_driver: overlay
 verifier:
   name: testinfra
   lint:
