@@ -11,32 +11,3 @@
     name: docker
     state: started
     enabled: true
-
-- name: get docker info
-  docker_host_info:
-  register: dockerinfo
-
-- name: show all
-  debug:
-    var: dockerinfo.host_info
-
-- name: show driver
-  debug:
-    var: dockerinfo.host_info.Driver
-
-- name: show driver
-  debug:
-    var: dockerinfo.host_info.DriverStatus
-  when: dockerinfo.host_info.DriverStatus is defined
-
-- name: Set storage driver when required
-  include_tasks: config-driver.yml
-
-- name: show driver
-  debug:
-    var: dockerinfo.host_info.Driver
-
-- name: show driver
-  debug:
-    var: dockerinfo.host_info.DriverStatus
-  when: dockerinfo.host_info.DriverStatus is defined
